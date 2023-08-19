@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of dropout is to ...
+The goal of dropout is to offer tools for dropout analyis when working with survey data
 
 ## Installation
 
