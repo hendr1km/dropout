@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The aim of Dropout is to provide tools for dropout analysis when working with survey data.
+The aim of dropout is to provide tools for dropout analysis when working with survey data.
 
 ## Installation
 
