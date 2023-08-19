@@ -1,6 +1,6 @@
 
 # dropout
-
+![Book logo](logo.png)
 <!-- badges: start -->
 <!-- badges: end -->
 
