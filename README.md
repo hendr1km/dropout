@@ -1,9 +1,6 @@
 
 # dropout
-![Book logo](logo.png){
-   width:150px;
-   height:100px;
-}
+
 <!-- badges: start -->
 <!-- badges: end -->
 
