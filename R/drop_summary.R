@@ -9,7 +9,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' # drop_summary (with the index of the last servey item)
 #' drop_summary(df, last_col = 50)
 #'
