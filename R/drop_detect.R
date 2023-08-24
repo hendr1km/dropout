@@ -49,64 +49,8 @@
 
 drop_detect <- function(data, last_col) {
 
-  # Check if there is the optional operator last col, otherwise use data
-  if (missing(last_col)) {
-    data
-  } else {
-    if (is.character(last_col)) {  # Change 'col' to 'last_col'
-      col_index <- which(names(data) == last_col)  # Change 'data_frame' to 'data'
-    } else if (is.numeric(last_col)) {
-      col_index <- last_col
-    } else {
-      stop("Column must be specified by name or index.")
-    }
+  result_list <- drop_prepare(data, last_col)
 
-    if (length(col_index) != 1) {
-      stop("Column not found or ambiguous.")
-    }
-
-    data <- data[, 1:col_index]
-  }
-
-  data_subset <-
-    output <- apply(data, 1, function(row) {
-      dropout_col <- character(1)
-      for (i in 1:(ncol(data))) {
-        if (all(is.na(row[i:ncol(data)]))) {
-          dropout_col <- colnames(data)[i]
-          break
-        }
-      }
-      if (identical(dropout_col, character(0))) {
-        dropout_col <- NA
-      }
-      return(dropout_col)
-    })
-
-  output <- ifelse(output == "", NA, output)
-
-  drop_data <- data.frame(dropout_column = output)
-
-  if (!any(is.na(data[, ncol(data)]))) {
-    warning("No Dropouts detected. \n Please set last_col to the the last survey item. Use ?drop_detect to find out more")
-  }
-
-  drop_data$dropout <- !is.na(drop_data$dropout_column)
-
-  # experimental (dropout index)
-
-  drop_data$dropout_index <- ifelse(!is.na(drop_data$dropout_column), match(drop_data$dropout_column, colnames(df)), NA)
-
-  if (requireNamespace("tibble", quietly = TRUE)) {
-    drop_data <- tryCatch(
-      as_tibble(drop_data),
-      error = function(e) {
-        drop_data$dropout <- as.logical(drop_data$dropout)
-        drop_data
-      }
-    )
-  }
-
-  drop_data
+  return(result_list$list_data)
 
 }
