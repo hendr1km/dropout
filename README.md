@@ -11,7 +11,7 @@ The goal of dropout is to ...
 You can install the development version of dropout like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("hendr1km/dropout")
 ```
 
 ## Example
