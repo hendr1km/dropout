@@ -18,7 +18,6 @@ A dataframe or tibble containing the following for each column of your dataset: 
 This function produces a summary of the occurrence of dropouts and NA for the dataset. This makes it possible to distinguish which parts of the missing values are due to dropouts and which are due to other causes. In this way, questions with high dropout rates or non-dropout NAs can be identified.
 }
 \examples{
-
 # drop_summary (with the index of the last servey item)
 drop_summary(df, last_col = 50)
 
