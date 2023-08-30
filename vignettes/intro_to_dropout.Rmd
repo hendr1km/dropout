@@ -47,7 +47,7 @@ In this vignette, we will provide an in-depth overview of the dropout package's 
 While the dropout package can function independently, integrating it with the tidyverse ecosystem (especially using dplyr) can significantly enhance your workflow. However all of the methods used in this Vignette can be transferred to using Base R code exclusively.
 
 ```{r,  message=FALSE}
-library(tidyverse)
+library(dplyr)
 data("flying")
 ```
 
@@ -172,6 +172,8 @@ flying %>%
 One practical application is to compare the demographics (e.g., age and gender) between those who left out a section and those who did not. The following code generates a bar graph that breaks down dropout rates by age group and gender.
 
 ```{r, fig.cap="Comparative Analysis of Age and Gender against Dropout Rates"}
+library(ggplot2)
+
 flying %>%
   drop_detect("smoking_violation") %>% 
   bind_cols(flying, .) %>% 

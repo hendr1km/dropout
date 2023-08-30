@@ -26,16 +26,7 @@ It also provides the index of that column, enabling targeted analysis of dropout
 }
 \examples{
 # Basic usage
-drop_detect(flying, "location_census_region") \%>\%
-bind_cols(flying, .)
-
-# Filtering for late dropouts
-flying \%>\%
-drop_detect("location_census_region") \%>\%
-bind_cols(flying, .) \%>\%
-filter(dropout == FALSE | dropout_index > 22)
-
-# Read more about practical workflows and advanced use-cases in the vignette.
+drop_detect(flying, "location_census_region")
 
 }
 \seealso{

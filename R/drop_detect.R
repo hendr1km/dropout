@@ -11,22 +11,14 @@
 #' - `dropout`: A logical indicating whether a dropout was detected for this row.
 #' - `dropout_column`: If `dropout` is TRUE, the name of the column where the dropout occurred.
 #' - `dropout_index`: If `dropout` is TRUE, the index (column number) where the dropout occurred.
-#' @export
 #'
 #' @examples
 #' # Basic usage
-#' drop_detect(flying, "location_census_region") %>%
-#' bind_cols(flying, .)
-#'
-#' # Filtering for late dropouts
-#' flying %>%
-#' drop_detect("location_census_region") %>%
-#' bind_cols(flying, .) %>%
-#' filter(dropout == FALSE | dropout_index > 22)
-#'
-#' # Read more about practical workflows and advanced use-cases in the vignette.
+#' drop_detect(flying, "location_census_region")
 #'
 #' @seealso See vignette for detailed workflows and practical examples.
+#'
+#' @export
 
 drop_detect <- function(data, last_col = NULL) {
  # Implementation of the function

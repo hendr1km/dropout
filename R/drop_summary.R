@@ -1,28 +1,29 @@
 #' Summarizing Dropouts in Surveys
 #'
-#' `dropout_summary` function provides a high-level summary of dropout occurrences in the survey data.
+#' `drop_summary` function provides a high-level summary of dropout occurrences in the survey data.
 #' It generates key statistics to understand the patterns of participant dropouts across different survey questions.
 #'
 #' @param data A dataframe or tibble containing the survey data.
 #' @param last_col The index position or column name of the last survey item. This is optional and is used when there are additional columns in the data frame that are not part of the survey questions you are interested in.
+#' @param section_min Indicates occurrences of missing values that span at least n consecutive columns (n defaults to 3)
 #'
 #' @return A dataframe or tibble containing summary statistics about dropouts. Typical columns might include:
 #' - `question_name`: The name of the survey question or column.
 #' - `dropout_count`: The number of dropouts at this question.
 #' - `dropout_percentage`: The percentage of participants who dropped out at this question.
 #'
-#' @export
-#'
 #' @examples
 #' # Basic usage
-#' dropout_summary(flying, "location_census_region")
+#' drop_summary(flying, "location_census_region")
 #'
 #' # Summarizing dropouts up to a specific column
-#' dropout_summary(flying, last_col = "age")
+#' drop_summary(flying, last_col = "age")
 #'
 #' # Read more in the vignette for interpreting summary statistics and plotting dropout trends.
 #'
 #' @seealso See vignette for detailed workflows, tips on interpretation, and practical examples.
+#'
+#' @export
 
 
 
@@ -120,7 +121,7 @@ drop_summary <- function(data, last_col, section_min = 3) {
         current_sequence <- append(current_sequence, colnames(sec_data)[i])
       } else {
         if (length(current_sequence) >= section_min) {
-          last_column_in_sequence <- tail(current_sequence, 1)
+          last_column_in_sequence <- utils::tail(current_sequence, 1)
           if (last_column_in_sequence != colnames(sec_data)[ncol(sec_data)]) {
             found_sequences <- append(found_sequences, list(current_sequence))
           }
@@ -170,7 +171,7 @@ drop_summary <- function(data, last_col, section_min = 3) {
   # Convert to tibble if tibble package is installed
   if (requireNamespace("tibble", quietly = TRUE)) {
     result_df <- tryCatch(
-      as_tibble(result_df),
+      tibble::as_tibble(result_df),
       error = function(e) {
         # Return the data frame directly if tibble package is not available
         return(result_df)

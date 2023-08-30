@@ -56,7 +56,7 @@
 
     if (requireNamespace("tibble", quietly = TRUE)) {
       drop_data <- tryCatch(
-        as_tibble(drop_data),
+        tibble::as_tibble(drop_data),
         error = function(e) {
           drop_data$dropout <- as.logical(drop_data$dropout)
           drop_data
