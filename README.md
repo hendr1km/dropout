@@ -1,6 +1,7 @@
 # dropout <img src="man/figures/logo.png" align="right" width="150" />
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/hendr1km/dropout/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hendr1km/dropout/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `dropout` package offers robust tools for dropout analysis in survey data. It helps you identify and handle incomplete responses effectively to ensure the quality of your research findings.
