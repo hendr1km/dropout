@@ -45,5 +45,5 @@ dropout_summary(flying, "location_census_region")
 
 ## Further Reading
 
-For more details, practical examples, and tips on interpreting summary statistics, please refer to the package [vignette](https://hendr1km.github.io/dropout/)
+For more details, practical examples, and tips on interpreting summary statistics, please refer to the package [vignette](https://hendr1km.github.io/dropout/).
 
