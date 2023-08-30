@@ -1,6 +1,6 @@
 Package: dropout
 Title: tools for dropout analysis when working with survey data
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: person("Hendrik", "Mann", email = "hendrik.mann@uni-wuppertal.de", role = c("aut", "cre", "cph"))
 Description: A package for performing dropout analysis when working with survey data.
 License: MIT + file LICENSE
