@@ -1,24 +1,48 @@
 library(testthat)
 library(dropout)
 
-# detects the correct dropouts with index for every row in the dataframe
-test_that("detect dropouts correctly", {
- df <- data.frame(
-  Name = c("Alice", "Bob", "Sam", "David", NA),
-  Age = c(NA, 30, NA, 22, 28),
-  Hair_color = c("red", "green", NA, "pink", "brown"),
-  Likes_dogs = c(TRUE, FALSE, NA, FALSE, NA)
- )
+test_that("drop_detect identifies dropouts correctly", {
+  sample_data <- data.frame(
+    id = 1:3,
+    q1 = c(1, 2, 3),
+    q2 = c(3, NA, NA),
+    q3 = c(1, 2, NA)
+  )
 
- result <- drop_detect(df)
+  result <- drop_detect(sample_data, "q3")
 
- expected_result <- data.frame(
-  dropout_column = as.character(c("NA", "NA", "Age", "NA", "Likes_dogs")),
-  dropout = as.logical(c(FALSE, FALSE, TRUE, FALSE, TRUE)),
-  dropout_index = as.integer(c(NA, NA, 2, NA, 4))
- )
+  expect_equal(result$dropout, c(FALSE, FALSE, TRUE))
+})
 
- expect_identical(result, expected_result)
+test_that("drop_detect works when last_col is specified as an index", {
+  sample_data <- data.frame(
+    q1 = c(1, 2, 3),
+    q2 = c(3, NA, NA),
+    q3 = c(1, 2, NA)
+  )
+
+  result <- drop_detect(sample_data, 3)
+
+  expect_equal(result$dropout, c(FALSE, FALSE, TRUE))
+})
+
+test_that("drop_detect handles all-NA column correctly", {
+  sample_data <- data.frame(
+    q1 = c(NA, NA, NA),
+    q2 = c(NA, NA, NA)
+  )
+
+  result <- drop_detect(sample_data, "q2")
+
+  expect_equal(result$dropout, c(TRUE, TRUE, TRUE))
 })
 
 
+test_that("drop_detect handles missing last_col gracefully", {
+  sample_data <- data.frame(
+    q1 = c(1, 2, 3),
+    q2 = c(3, NA, NA)
+  )
+
+  expect_error(drop_detect(sample_data, "q5"))
+})
