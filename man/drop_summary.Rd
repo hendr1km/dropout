@@ -4,7 +4,7 @@
 \alias{drop_summary}
 \title{Dropout Summary}
 \usage{
-drop_summary(data, last_col)
+drop_summary(data, last_col, section_min = 3)
 }
 \arguments{
 \item{data}{dataframe or tibble to detect dropouts.}
@@ -12,7 +12,7 @@ drop_summary(data, last_col)
 \item{last_col}{Index position or column name of the last survey item. This is an optional argument and is needed if there are other columns in your dataframe after the survey items you want to detect the dropout for. Read more using ?drop_detect}
 }
 \value{
-A dataframe or tibble containing the following for each column of your dataset: column in your dataset: the column name (column_name), the number of dropouts occurring in each column (dropout), the proportion of respondents who dropped out of the survey in that column (drop_rate), the sum of na values in the column not due to dropouts (true_na) and due to dropouts (drop_na). As well as the total missing values and the total proportion of people who completed the column (completion_rate).
+A dataframe or tibble containing the following for each column of your dataset: column in your dataset: the column name (column_name), the number of dropouts occurring in each column (dropout), the proportion of respondents who dropped out of the survey in that column (drop_rate), the sum of na values in the column not due to dropouts (single_na) and due to dropouts (drop_na). As well as the total missing values and the total proportion of people who completed the column (completion_rate).
 }
 \description{
 This function produces a summary of the occurrence of dropouts and NA for the dataset. This makes it possible to distinguish which parts of the missing values are due to dropouts and which are due to other causes. In this way, questions with high dropout rates or non-dropout NAs can be identified.

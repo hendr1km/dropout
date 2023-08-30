@@ -5,7 +5,7 @@
 #' @param data dataframe or tibble to detect dropouts.
 #' @param last_col Index position or column name of the last survey item. This is an optional argument and is needed if there are other columns in your dataframe after the survey items you want to detect the dropout for. Read more using ?drop_detect
 #'
-#' @return A dataframe or tibble containing the following for each column of your dataset: column in your dataset: the column name (column_name), the number of dropouts occurring in each column (dropout), the proportion of respondents who dropped out of the survey in that column (drop_rate), the sum of na values in the column not due to dropouts (true_na) and due to dropouts (drop_na). As well as the total missing values and the total proportion of people who completed the column (completion_rate).
+#' @return A dataframe or tibble containing the following for each column of your dataset: column in your dataset: the column name (column_name), the number of dropouts occurring in each column (dropout), the proportion of respondents who dropped out of the survey in that column (drop_rate), the sum of na values in the column not due to dropouts (single_na) and due to dropouts (drop_na). As well as the total missing values and the total proportion of people who completed the column (completion_rate).
 #' @export
 #'
 #' @examples
@@ -20,7 +20,7 @@
 
 
 
-drop_summary <- function(data, last_col) {
+drop_summary <- function(data, last_col, section_min = 3) {
 
   # Prepare the data
   drop_df <- drop_prepare(data, last_col)
@@ -94,7 +94,6 @@ drop_summary <- function(data, last_col) {
 
   }
   # Initialize variables for section dropout calculations
-  n <- 3  # Set the minimum sequence length
   na_sequences_list <- list()
 
   # Loop through each row of the sec_data
@@ -114,7 +113,7 @@ drop_summary <- function(data, last_col) {
       if (i <= ncol(sec_data) && is.na(row[i])) {
         current_sequence <- append(current_sequence, colnames(sec_data)[i])
       } else {
-        if (length(current_sequence) >= n) {
+        if (length(current_sequence) >= section_min) {
           last_column_in_sequence <- tail(current_sequence, 1)
           if (last_column_in_sequence != colnames(sec_data)[ncol(sec_data)]) {
             found_sequences <- append(found_sequences, list(current_sequence))
@@ -151,12 +150,12 @@ drop_summary <- function(data, last_col) {
   # If there might be NAs in the matched indices, then replace NAs in the new columns with 0
   result_df[is.na(result_df)] <- 0
 
-  # Compute true_na and drop_na metrics
-  result_df$true_na <- result_df$missing - cumsum(result_df$dropout) - result_df$section_na
-  result_df$drop_na <- result_df$missing - result_df$true_na - result_df$section_na
+  # Compute single_na and drop_na metrics
+  result_df$single_na <- result_df$missing - cumsum(result_df$dropout) - result_df$section_na
+  result_df$drop_na <- result_df$missing - result_df$single_na - result_df$section_na
 
   # Reorder the columns
-  result_df <- result_df[, c("column_name", "dropout", "drop_rate", "drop_na", "section_na", "true_na", "missing", "completion_rate")]
+  result_df <- result_df[, c("column_name", "dropout", "drop_rate", "drop_na", "section_na", "single_na", "missing", "completion_rate")]
 
   # Reorder the data frame based on the original column order
   original_order <- match(result_df$column_name, names(data[, 1:col_index]))
