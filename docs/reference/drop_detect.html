@@ -92,18 +92,21 @@ It also provides the index of that column, enabling targeted analysis of dropout
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage</span></span></span>
-<span class="r-in"><span><span class="fu">drop_detect</span><span class="op">(</span><span class="va">flying</span>, <span class="st">"location_census_region"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">flying</span>, <span class="va">.</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in drop_detect(flying, "location_census_region") %&gt;% bind_cols(flying,     .):</span> could not find function "%&gt;%"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Filtering for late dropouts</span></span></span>
-<span class="r-in"><span><span class="va">flying</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span><span class="fu">drop_detect</span><span class="op">(</span><span class="st">"location_census_region"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">flying</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">|</span> <span class="va">dropout_index</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in flying %&gt;% drop_detect("location_census_region") %&gt;% bind_cols(flying,     .) %&gt;% filter(dropout == FALSE | dropout_index &gt; 22):</span> could not find function "%&gt;%"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Read more about practical workflows and advanced use-cases in the vignette.</span></span></span>
+<span class="r-in"><span><span class="fu">drop_detect</span><span class="op">(</span><span class="va">flying</span>, <span class="st">"location_census_region"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,040 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    dropout_column     dropout dropout_index</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> seat_recline       TRUE                3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> switch_for_friends TRUE               15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #BB0000;">NA</span>                 FALSE              <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,030 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
