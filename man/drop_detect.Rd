@@ -2,57 +2,42 @@
 % Please edit documentation in R/drop_detect.R
 \name{drop_detect}
 \alias{drop_detect}
-\title{Detecting Dropouts}
+\title{Detecting Dropouts in Surveys}
 \usage{
-drop_detect(data, last_col)
+drop_detect(data, last_col = NULL)
 }
 \arguments{
-\item{data}{dataframe or tibble to detect dropouts.}
+\item{data}{A dataframe or tibble containing the survey data.}
 
-\item{last_col}{Index position or column name of the last survey item. This is an optional argument and is needed if there are other columns in your dataframe after the survey items you want to detect the dropout for.}
+\item{last_col}{The index position or column name of the last survey item. This is optional and is used when there are additional columns in the data frame that are not part of the survey questions you are interested in.}
 }
 \value{
-A dataframe or tibble containing the following for each row of your dataset: A logical whether a dropout has been detected and, if so, the column name where it occurs and the index of the column.
+A dataframe or tibble where each row corresponds to a row in the original dataset. It contains three columns:
+\itemize{
+\item \code{dropout}: A logical indicating whether a dropout was detected for this row.
+\item \code{dropout_column}: If \code{dropout} is TRUE, the name of the column where the dropout occurred.
+\item \code{dropout_index}: If \code{dropout} is TRUE, the index (column number) where the dropout occurred.
+}
 }
 \description{
-The function detects participants who drop out of the survey by recognising NA sequences up to the last question of the survey. The column of the dropout is also determined, as well as the respective index of the column. This forms the basis for various methods of dropout analysis.
+\code{drop_detect} function detects participants who have dropped out of a survey.
+It identifies sequences of NA values up to the last survey question and pinpoints the column where the dropout occurred.
+It also provides the index of that column, enabling targeted analysis of dropout patterns.
 }
 \examples{
-# detecting dropouts with the index position 50 as the last question column
-drop_detect(df, last_col = 50)
+# Basic usage
+drop_detect(flying, "location_census_region") \%>\%
+bind_cols(flying, .)
 
-# counting dropouts by gender
-df \%>\%
- drop_detect(last_col = "question_50") \%>\%
- bind_cols(df,.) \%>\%
- group_by(gender) \%>\%
- count(dropout)
+# Filtering for late dropouts
+flying \%>\%
+drop_detect("location_census_region") \%>\%
+bind_cols(flying, .) \%>\%
+filter(dropout == FALSE | dropout_index > 22)
 
-# mean age of participants who did not drop out
-df \%>\%
- drop_detect() \%>\%
- select(dropout) \%>\%
- bind_cols(df,.) \%>\%
- filter(dropout = FALSE) \%>\%
- summarise(mean_age = mean(age))
+# Read more about practical workflows and advanced use-cases in the vignette.
 
-# subsample for the first 8 questions without dropouts
-subsample <-
- df |>
- drop_detect() \%>\%
- bind_cols(df,.) \%>\%
- filter(dropout = FALSE | dropout_index > 8) \%>\%
- select(1:8)
-
-# comparing the count of dropouts for two sections of the survey
-df \%>\%
-drop_detect(last_col = 35) \%>\%
-select(dropout_index) \%>\%
-mutate(section = case_when(dropout_index >= 5 & dropout_index <= 20 ~ "Section_1",
-       dropout_index >=21 & dropout_index <=35 ~ "Section_2")) \%>\%
-         count(section) \%>\%
-         filter(!is.na(section))
-
-
- # Read more about possible use cases in the vignette :)
+}
+\seealso{
+See vignette for detailed workflows and practical examples.
 }

@@ -1,22 +1,28 @@
-#' Dropout Summary
+#' Summarizing Dropouts in Surveys
 #'
-#' This function produces a summary of the occurrence of dropouts and NA for the dataset. This makes it possible to distinguish which parts of the missing values are due to dropouts and which are due to other causes. In this way, questions with high dropout rates or non-dropout NAs can be identified.
+#' `dropout_summary` function provides a high-level summary of dropout occurrences in the survey data.
+#' It generates key statistics to understand the patterns of participant dropouts across different survey questions.
 #'
-#' @param data dataframe or tibble to detect dropouts.
-#' @param last_col Index position or column name of the last survey item. This is an optional argument and is needed if there are other columns in your dataframe after the survey items you want to detect the dropout for. Read more using ?drop_detect
+#' @param data A dataframe or tibble containing the survey data.
+#' @param last_col The index position or column name of the last survey item. This is optional and is used when there are additional columns in the data frame that are not part of the survey questions you are interested in.
 #'
-#' @return A dataframe or tibble containing the following for each column of your dataset: column in your dataset: the column name (column_name), the number of dropouts occurring in each column (dropout), the proportion of respondents who dropped out of the survey in that column (drop_rate), the sum of na values in the column not due to dropouts (single_na) and due to dropouts (drop_na). As well as the total missing values and the total proportion of people who completed the column (completion_rate).
+#' @return A dataframe or tibble containing summary statistics about dropouts. Typical columns might include:
+#' - `question_name`: The name of the survey question or column.
+#' - `dropout_count`: The number of dropouts at this question.
+#' - `dropout_percentage`: The percentage of participants who dropped out at this question.
+#'
 #' @export
 #'
 #' @examples
-#' # drop_summary (with the index of the last servey item)
-#' drop_summary(df, last_col = 50)
+#' # Basic usage
+#' dropout_summary(flying, "location_census_region")
 #'
-#' # columns with most dropouts (descending)
-#' df %>%
-#'  drop_summary() %>%
-#'  arrange(dsc(dropout)) %>%
-#'  head(n = 10)
+#' # Summarizing dropouts up to a specific column
+#' dropout_summary(flying, last_col = "age")
+#'
+#' # Read more in the vignette for interpreting summary statistics and plotting dropout trends.
+#'
+#' @seealso See vignette for detailed workflows, tips on interpretation, and practical examples.
 
 
 
