@@ -1,8 +1,4 @@
-<table>
-<tr>
-<td>
-
-# dropout
+# dropout <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -57,8 +53,3 @@ dropout_summary(flying, "location_census_region")
 
 For more details, practical examples, and tips on interpreting summary statistics, please refer to the package vignette.
 
-
-</td>
-<td> <img src="man/figures/logo.png" alt="Logo" style="width: 400px;"/> </td>
-</tr>
-</table>
