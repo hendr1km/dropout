@@ -3,7 +3,7 @@ title: "Using dropout"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to Dropout}
+  %\VignetteIndexEntry{Using dropout}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
