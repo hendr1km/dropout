@@ -19,20 +19,13 @@ devtools::install_github("hendr1km/dropout")
 
 - **dropout_summary**: Offers a high-level summary of dropout occurrences, providing key statistics to understand the patterns of participant dropouts across different survey questions.
 
-## Example Usage
 
-### Basic Example
-
-```r
-library(dropout)
-# Your basic example code here
-```
 
 ### Using `drop_detect`
 
 ```r
 library(dropout)
-library(dplyr)
+library(dplyr) # not necessary, but recommended
 
 # Detect dropouts in the 'flying' dataset up to the column "location_census_region"
 drop_detect(flying, "location_census_region") %>%
