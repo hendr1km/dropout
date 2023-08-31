@@ -13,7 +13,7 @@ You can install the development version of `dropout` from GitHub using the follo
 
 ```r
 # Install the released version from CRAN
-install.packages("testthat")
+install.packages("dropout")
 
 # development version from GitHub:
 devtools::install_github("hendr1km/dropout")
