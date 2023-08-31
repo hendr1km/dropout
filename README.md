@@ -4,9 +4,6 @@
 [![R-CMD-check](https://github.com/hendr1km/dropout/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hendr1km/dropout/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/dropout)](https://CRAN.R-project.org/package=dropout)
 <!-- badges: end -->
-```r
-library(dropout)
-```
 
 The `dropout` package offers robust tools for dropout analysis in survey data. It helps you identify and handle incomplete responses effectively to ensure the quality of your research findings.
 
