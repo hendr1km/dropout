@@ -12,6 +12,10 @@ The `dropout` package offers robust tools for dropout analysis in survey data. I
 You can install the development version of `dropout` from GitHub using the following command:
 
 ```r
+# Install the released version from CRAN
+install.packages("testthat")
+
+# development version from GitHub:
 devtools::install_github("hendr1km/dropout")
 ```
 
