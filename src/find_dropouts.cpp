@@ -5,9 +5,9 @@ using namespace Rcpp;
 DataFrame find_dropouts(DataFrame df) {
 
   int nRows = df.nrows();
-  int nCols = df.size();  // Corrected from df.ncols()
+  int nCols = df.size();  // Use df.size() instead of non-existent df.ncols()
 
-  CharacterVector df_names = df.attr("names"); // Corrected from df.names()
+  CharacterVector df_names = df.attr("names"); // Use df.attr("names") instead of non-existent df.names()
 
   // Initialize vectors to store the results
   CharacterVector dropout_col(nRows, NA_STRING);
@@ -16,8 +16,6 @@ DataFrame find_dropouts(DataFrame df) {
 
   // Loop through each row
   for(int i = 0; i < nRows; ++i) {
-
-    bool found = false;
 
     // Loop through each column
     for(int j = 0; j < nCols; ++j) {
@@ -51,7 +49,7 @@ DataFrame find_dropouts(DataFrame df) {
 
       // If a dropout column is found, update the result vectors and break the loop
       if(all_na) {
-        dropout_col[i] = df_names[j];  // Corrected from df.names()
+        dropout_col[i] = df_names[j];
         dropout[i] = true;
         dropout_index[i] = j + 1; // R index starts from 1
         break;
@@ -70,3 +68,4 @@ DataFrame find_dropouts(DataFrame df) {
 
   return result;
 }
+
