@@ -47,6 +47,7 @@ In this vignette, we will provide an in-depth overview of the dropout package's 
 The package is designed for effortless integration with widely used data wrangling libraries such as dplyr from the tidyverse ecosystem. These libraries provide a rich toolkit for data manipulation and analysis. Additionally, in a recent update, substantial portions of the package's code were rewritten using C++, a high-performance programming language. This enhancement allows the `dropout` package to handle larger datasets efficiently. Consequently, it is well-suited for analyzing substantial volumes of data, making it a valuable tool for both small-scale and big data survey analyses.
 
 ```{r,  message=FALSE}
+library(dplyr)
 data("flying")
 ```
 
