@@ -13,13 +13,16 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    dplyr,
     ggplot2
-Imports: 
-  tibble
+Imports:
+    dplyr,
+    tibble,
+    Rcpp (>= 1.0.0)
+LinkingTo: 
+    Rcpp
 Config/testthat/edition: 3
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10),
 LazyData: true
 VignetteBuilder: knitr
 
