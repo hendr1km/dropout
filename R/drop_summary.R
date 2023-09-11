@@ -38,7 +38,7 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
 
       if (all(!is.na(data[, last_col]))) {
         data <- data |>
-          select(-last_col)
+          dplyr::select(-last_col)
       } else {
         warning(paste("last_col set to", last_col_name))
         break
@@ -47,7 +47,7 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
   } else {
     # Select all columns up to last_col
     data <- data |>
-      select(1:last_col)
+      dplyr::select(1:last_col)
   }
 
   result <- data |>
@@ -136,7 +136,7 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
   original_order <- match(result_df$column_name, names(data[, 1:col_index]))
   result_df <- result_df[order(original_order), ]
 
-  return(tibble(result_df))
+  return(tibble::tibble(result_df))
 }
 
 

@@ -33,7 +33,7 @@ drop_detect <- function(data, last_col = NULL) {
    last_col_name <- colnames(data)[last_col]
 
    if (all(!is.na(data[, last_col]))) {
-    data <- data |> select(-last_col)
+    data <- data |> dplyr::select(-last_col)
    } else {
     warning(paste("last_col set to", last_col_name))
     break
@@ -41,12 +41,12 @@ drop_detect <- function(data, last_col = NULL) {
   }
  } else {
   # Select all columns up to last_col
-  data <- data |> select(1:last_col)
+  data <- data |> dplyr::select(1:last_col)
  }
 
  result <- data |>
   find_dropouts() |>
-  tibble()
+  tibble::tibble()
 
  return(result)
 }
