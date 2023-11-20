@@ -1,24 +1,17 @@
 ---
-title: 'dropout: an R Package for Addressing Dropouts, Missing Values, and Sectional
-  Challenges in Survey Data Analysis'
+title: 'dropout: an R Package for Addressing Dropouts, Missing Values, and Sectional Challenges in Survey Data Analysis'
 tags:
 - R
 - dropout
 - missing values
 - participation
 - survey data
-date: "19 November 2023"
-output:
-  pdf_document: default
-  word_document: default
-bibliography: paper.bib
-editor_options:
-  chunk_output_type: console
 authors:
 - name: Hendrik Mann
-  orcid: "0009-0007-3222-899X"
+  orcid: 0009-0007-3222-899X
   affiliation: University of Wuppertal, Germany
-  output: md_document
+date: "19 November 2023"
+bibliography: paper.bib
 ---
 
 # Summary
