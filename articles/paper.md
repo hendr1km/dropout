@@ -9,7 +9,7 @@ tags:
 authors:
 - name: Hendrik Mann
   orcid: 0009-0007-3222-899X
-  affiliation: University of Wuppertal, Germany
+  affiliation: University of Wuppertal
 date: "19 November 2023"
 bibliography: paper.bib
 ---
