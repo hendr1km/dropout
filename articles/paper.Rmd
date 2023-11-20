@@ -13,8 +13,9 @@ bibliography: paper.bib
 editor_options:
   chunk_output_type: console
 authors:
-- name: Hendrik Mann, University of Wuppertal, Germany
+- name: Hendrik Mann
   orcid: "0009-0007-3222-899X"
+  affiliation: University of Wuppertal, Germany
 ---
 
 # Summary
@@ -25,7 +26,7 @@ Missing data can reduce the statistical power of a study and can produce biased 
 
 `dropout` is an R package [@R] available on CRAN, designed to differentiate various types of missing values in survey data. It enables users to identify whether missing values are due to complete dropouts—participants ceasing to answer the questionnaire entirely, participants skipping entire sections, or isolated instances of 'NA' values. This distinction is crucial for accurate data analysis and understanding participant engagement in surveys.
 Beyond creating summary statistics, the package adeptly identifies participants who have either completely dropped out, skipped sections, or left specific questions unanswered. This capability not only facilitates thorough data cleaning but also provides insights into the various factors influencing dropout behavior.
-The `dropout`R package's scalability is enhanced by the integration of C++ code through the Rcpp package, developed by @rcpp. This incorporation makes `dropout` particularly effective for analyzing large survey datasets.
+The `dropout` package's scalability is enhanced by the integration of C++ code through the Rcpp package, developed by @rcpp. This incorporation makes `dropout` particularly effective for analyzing large survey datasets.
 
 # Usage
 
@@ -89,6 +90,8 @@ flying_cleaned %>%
 In this article's concluding section, we explore the practical applications of these techniques in analyzing distinct dropout behaviors. Through the visualisation in \autoref{fig:fig1}, we will contrast participants who omitted a particular survey section with those who partially completed it or had missing values that did not start at the beginning of the section. We will segment this comparative analysis by gender to illustrate how one might investigate varying dropout behaviors across different demographic groups. This approach exemplifies how data on dropout patterns can be dissected to yield insights into the participant experience and inform improvements in survey design.
 
 ```{r}
+# library(ggplot)
+
 flying_section <- flying_cleaned %>% 
  select(3:22) %>% 
  drop_detect(last_col = "smoking_violation") %>%
