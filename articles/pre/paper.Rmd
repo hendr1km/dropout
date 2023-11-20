@@ -8,7 +8,9 @@ tags:
 - participation
 - survey data
 date: "19 November 2023"
-output: pdf_document
+output:
+  pdf_document: default
+  word_document: default
 bibliography: paper.bib
 editor_options:
   chunk_output_type: console
@@ -16,6 +18,7 @@ authors:
 - name: Hendrik Mann
   orcid: "0009-0007-3222-899X"
   affiliation: University of Wuppertal, Germany
+  output: md_document
 ---
 
 # Summary
