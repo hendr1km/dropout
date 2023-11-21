@@ -12,7 +12,10 @@ bibliography: paper.bib
 authors:
 - name: Hendrik Mann
   orcid: "0009-0007-3222-899X"
-  affiliation: "University of Wuppertal, Germany"
+  affiliation: 1
+affiliations:
+- name: "University of Wuppertal, Germany"
+  index: 1
 ---
 
 # Summary
@@ -136,7 +139,7 @@ fig2 <- flying %>%
 
 # References
 
-<div id="refs"></div>
+
 
 # Figures
 ![Analyzing Dropout Patterns and Missing Values with the 'dropout' Package. This graph illustrates the proportions of male and female participants who either omitted or completed the section of the survey from 'seat_recline' to 'smoking_validation'. It compares those who skipped this entire section (labeled as 'omitted') with those who either fully completed it or ceased responding past this section (labeled as 'completed').\label{fig:fig1}](Figures/fig1.pdf){ width=80% }
