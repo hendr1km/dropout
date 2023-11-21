@@ -1,17 +1,18 @@
 ---
 title: 'dropout: an R Package for Addressing Dropouts, Missing Values, and Sectional Challenges in Survey Data Analysis'
 tags:
-- R
+- r
 - dropout
 - missing values
 - participation
 - survey data
+date: "19 November 2023"
+output: pdf_document
+bibliography: paper.bib
 authors:
 - name: Hendrik Mann
-  orcid: 0009-0007-3222-899X
-  affiliation: University of Wuppertal
-date: "19 November 2023"
-bibliography: paper.bib
+  orcid: "0009-0007-3222-899X"
+  affiliation: "University of Wuppertal, Germany"
 ---
 
 # Summary
@@ -36,88 +37,102 @@ For the following examples we will use an adapted version of the Flying Etiquett
 
 As illustrated with the `flying` dataset example, even though all columns are arranged in the correct order of survey items, the last column survey_type does not correspond to a survey item. In such scenarios, the dropout package intuitively addresses this issue by disregarding the non-survey column and automatically setting the last_col argument to `location_census_region`. This adjustment is accompanied by a warning to inform the user. However, in more complex situations, it's advisable to either create a subset of your data or manually set the last_col argument to the actual last survey item. We will demonstrate this approach in the following examples.
 
+```r
+# install.packages(c("dropout", "tidyverse"))
 
-    # install.packages(c("dropout", "tidyverse"))
-
-    library(dropout)
-    library(tidyverse)
-    data(flying)
-
+library(dropout)
+library(tidyverse)
+data(flying)
+```
 
 Initially, we use the `drop_summary` function to generate an overview of the different types of missing values in our dataframe. From this analysis, it becomes evident that certain parts of the survey experience higher dropout rates. Notably, 18 participants dropped out early, at the third survey item, culminating in a total of 42 dropouts by the end of the survey. The ´section_na´ column reveals that 164 participants skipped an entire section of the questionnaire, or at least a consecutive portion identifiable as a section in this context. Furthermore, single missing values are particularly prevalent in responses to the household income question. 
 
 
-    flying %>% 
-    drop_summary(last_col = "location_census_region") %>% 
-    print(n = Inf) 
+```r
+flying %>% 
+drop_summary(last_col = "location_census_region") %>% 
+print(n = Inf) 
+```
+
 
 In the subsequent step, we aim to refine our dataset to include only those survey participants who did not experience an early dropout at the third question and who completed the survey without any dropouts. To achieve this, we utilize the drop_detect function, which identifies participants according to dropout status at specified points within the survey. By merging the output with our original data, we can then apply a filter to retain only the desired respondents. Once filtered, we remove the additional columns introduced by `drop_detect` as they are no longer necessary for further analysis. While not demonstrated in this example, this method of indexing is particularly advantageous when we need to perform complex manipulations, such as excluding all participants who dropped out before reaching the tenth item in the survey.
 
-    flying_dropouts <- flying %>% 
-    drop_detect(last_col = "location_census_region")
 
-    head(flying_dropouts)
+```r
+flying_dropouts <- flying %>% 
+drop_detect(last_col = "location_census_region")
 
-    flying_cleaned <- flying_dropouts %>% 
-    bind_cols(flying) %>% 
-    filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
-    select(-starts_with("dropout")) 
+head(flying_dropouts)
+
+flying_cleaned <- flying_dropouts %>% 
+bind_cols(flying) %>% 
+filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
+select(-starts_with("dropout")) 
+```
+
 
 Next, we aim to exclude the 164 participants who skipped an entire section of the survey without fully dropping out. This can be accomplished through two approaches. The first method involves setting the `last_col` argument of the `drop_detect` function to the last column of the omitted section. By doing so, all participants who skipped the entire section will be flagged as dropouts, making it straightforward to exclude them. The second method requires creating a subset of the dataset that includes only the columns of the concerned section. This subset can then be used to specifically filter for section-based dropouts. It is important to note that when working with such a subset, the indices provided by `dropout_index` might correspond to the subset's dataframe and not the original one. This distinction is crucial for accurately mapping the dropout information back to the complete dataset, when using a subset starting not from column one of the origional dataset. In the method 2 this is not an issue.  
 
+```r
+# method 1 (recommended as indexes of dropout_index will still match the data)
+flying_cleaned %>% 
+drop_detect(last_col = "smoking_violation") %>% 
+bind_cols(flying_cleaned) %>% 
+filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
+select(-starts_with("dropout")) 
 
-    # method 1 (recommended as indexes of dropout_index will still match the data)
-    flying_cleaned %>% 
-    drop_detect(last_col = "smoking_violation") %>% 
-    bind_cols(flying_cleaned) %>% 
-    filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
-    select(-starts_with("dropout")) 
+# method 2 (if the dropout_index will still match the data depends on the subset)
+flying_cleaned %>% 
+select(1:22) %>% 
+drop_detect() %>% 
+bind_cols(flying_cleaned) %>% 
+filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
+select(-starts_with("dropout")) 
+```
 
-    # method 2 (if the dropout_index will still match the data depends on the subset)
-    flying_cleaned %>% 
-    select(1:22) %>% 
-    drop_detect() %>% 
-    bind_cols(flying_cleaned) %>% 
-    filter(dropout_col != "seat_recline" | dropout == FALSE) %>% 
-    select(-starts_with("dropout")) 
 
 In this article's concluding section, we explore the practical applications of these techniques in analyzing distinct dropout behaviors. Through the visualisation in \autoref{fig:fig1}, we will contrast participants who omitted a particular survey section with those who partially completed it or had missing values that did not start at the beginning of the section. We will segment this comparative analysis by gender to illustrate how one might investigate varying dropout behaviors across different demographic groups. This approach exemplifies how data on dropout patterns can be dissected to yield insights into the participant experience and inform improvements in survey design.
 
 
-    # library(ggplot)
+```r
+# library(ggplot)
 
-    flying_section <- flying_cleaned %>% 
-    select(3:22) %>% 
-    drop_detect(last_col = "smoking_violation") %>%
-    bind_cols(flying_cleaned) %>% 
-    filter(dropout_col == "seat_recline") %>% 
-    count(gender) %>% 
-    rename(omitted = n)
+flying_section <- flying_cleaned %>% 
+select(3:22) %>% 
+drop_detect(last_col = "smoking_violation") %>%
+bind_cols(flying_cleaned) %>% 
+filter(dropout_col == "seat_recline") %>% 
+count(gender) %>% 
+rename(omitted = n)
 
-    figure1 <- flying_cleaned %>%
-    count(gender) %>%
-    rename(N = n) %>%
-    drop_na() %>%
-    left_join(flying_section) %>%
-    mutate(completed = N - omitted) %>%
-    pivot_longer(3:4, values_to = "n", names_to = "condition") %>%
-    ggplot(aes(x = gender, y = n, fill = condition)) +
-    geom_col(position = "dodge")
+figure1 <- flying_cleaned %>%
+count(gender) %>%
+rename(N = n) %>%
+drop_na() %>%
+left_join(flying_section) %>%
+mutate(completed = N - omitted) %>%
+pivot_longer(3:4, values_to = "n", names_to = "condition") %>%
+  ggplot(aes(x = gender, y = n, fill = condition)) +
+  geom_col(position = "dodge")
+```
+
 
 Both the drop_summary and drop_detect functions are designed for seamless integration into data analysis workflows and pipelines. These functions facilitate an easy visualization of their output. In the follwing example of \autoref{fig:fig2}, we utilize the drop_summary function to visually represent missing values in the dataframe. The visualization distinctly categorizes the missing values into three types: dropouts, section_na (entire sections left out), and single_na (individual missing values).
 
 
-    fig2 <- flying %>% 
-    drop_summary(last_col = "location_census_region") %>% 
-    select(column_name, dropout, section_na, single_na) %>% 
-    pivot_longer(-column_name, names_to = "missing", values_to = "values") %>% 
-    mutate(column_name = fct_inorder(column_name)) %>%
+```r
+fig2 <- flying %>% 
+  drop_summary(last_col = "location_census_region") %>% 
+  select(column_name, dropout, section_na, single_na) %>% 
+  pivot_longer(-column_name, names_to = "missing", values_to = "values") %>% 
+  mutate(column_name = fct_inorder(column_name)) %>%
     ggplot(aes(x = column_name, y = values, group = missing, col = missing))+
     geom_line()+
     geom_point()+
     scale_x_discrete(guide = guide_axis(angle = 45))+
     xlab("items")+
     ylab("missing values")
+```
 
 # References
 
