@@ -34,8 +34,7 @@
 
 drop_summary <- function(data, last_col = NULL, section_min = 3) {
 
-  data <- data |>
-    dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+  data <- dplyr::mutate(data, dplyr::across(dplyr::everything(), as.character))
 
   if (is.null(last_col)) {
     while (ncol(data) > 0) {
@@ -43,8 +42,7 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
       last_col_name <- colnames(data)[last_col]
 
       if (all(!is.na(data[, last_col]))) {
-        data <- data |>
-          dplyr::select(-last_col)
+        data <- dplyr::select(data, -{{last_col}})
       } else {
         warning(paste("last_col set to", last_col_name))
         break
@@ -52,12 +50,10 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
     }
   } else {
     # Select all columns up to last_col
-    data <- data |>
-      dplyr::select(1:last_col)
+    data <- dplyr::select(data,1:{{last_col}})
   }
 
-  result <- data |>
-    find_dropouts()
+  result <- find_dropouts(data)
 
   # save result in a list (df and index)
   drop_df <- list(list_data = result,

@@ -7,6 +7,11 @@
 
 The `dropout` package offers robust tools for dropout analysis in survey data. It helps you identify and handle incomplete responses effectively to ensure the quality of your research findings.
 
+## Issues & Support
+
+If you encounter any issues with the software, we encourage you to report them in the GitHub Repository within the Issues section. This will help us identify and address problems more efficiently. Additionally, if you require support with the software or have any related inquiries, please feel free to contact me at hendrik.mann@uni-wuppertal.de. Your feedback and questions are valuable to us, and we are here to assist you.
+
+
 ## Installation
 
 You can install the development version of `dropout` from GitHub using the following command:
