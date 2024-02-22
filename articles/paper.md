@@ -25,8 +25,8 @@ Missing data can reduce the statistical power of a study and can produce biased 
 # Statement of need
 
 `dropout` is an R package [@R] available on CRAN that is designed to distinguish between different types of missing values in survey data. It allows users to identify whether missing values are due to complete dropouts - participants who stop answering the questionnaire completely, participants who skip whole sections, or isolated instances of NA values.
-Unlike current R packages that deal with missing values in data analysis by (visually) producing summary statistics that treat each missing value equally, such as `naniar` [@naniar] and `mde` [@mde], `dropout` classifies missing values based on the occurrence of single missing values, section `dropout`s and complete `dropout`s. This allows `dropout` to produce summary statistics of different response patterns and relate them to the overall occurrence of missing values.
-However, unlike `daqapo` [@daqapo], a package that can also be used to find sequential gaps of missing values for participants, `dropout` allows you to use its summary statistics and detect participants based on their classified response pattern in your further data cleaning and analysis workflow.
+Unlike current R packages that deal with missing values in data analysis by (visually) producing summary statistics that treat each missing value equally, such as `naniar` [@naniar] and `mde` [@mde], `dropout` classifies missing values based on the occurrence of single missing values, section dropouts and complete dropouts. This allows `dropout` to produce summary statistics of different response patterns and relate them to the overall occurrence of missing values.
+However, unlike `daqapo` [@daqapo], a package that can also be used to find sequential gaps of missing values for participants, `dropout` allows you to use its summary statistics and detect participants based on their classified response pattern in your further data cleaning and analysis workflow. 
 
 
 # Usage
