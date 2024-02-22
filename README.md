@@ -9,7 +9,7 @@ The `dropout` package offers robust tools for dropout analysis in survey data. I
 
 ## Issues & Support
 
-If you encounter any issues with the software, please report them in the GitHub Repository within the Issues section https://github.com/hendr1km/dropout/issues. This will help to identify and address problems more efficiently.
+If you encounter any issues with the software, please report them in the GitHub Repository within the Issues section https://github.com/hendr1km/dropout/issues. This will help to identify and address problems more efficiently. If you wish to contribute to the software please use a pull request. 
 Additionally, if you require support with the software or have any related inquiries, please feel free to contact me at hendrik.mann@uni-wuppertal.de. Your feedback and questions are valuable for the future development of the package.
 
 
