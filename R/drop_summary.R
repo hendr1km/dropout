@@ -105,8 +105,11 @@ drop_summary <- function(data, last_col = NULL, section_min = 3) {
   # Initialize variables for section dropout calculations
   result <- list()
 
-  result <- find_na_sequences(sec_data, section_min)
-
+  if(section_min < 1){
+    stop("`section_min` must be 1 or greater")
+  } else {
+    result <- find_na_sequences(sec_data, section_min)
+  }
   # Count how often each column appears in the sequences
   column_counts <- data.frame(table(unlist(result)))
 
