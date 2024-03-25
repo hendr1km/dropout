@@ -36,7 +36,7 @@ Unlike `daqapo` [@daqapo], a package that can also be used to find sequential ga
 
 # Examples
 
-For the following examples we will use an adapted version of the Flying Etiquette by five-thirty-eight dataset [@flying] that is included in the `dropout` package. In these workflow examples, I will be using dplyr verbs [@dplyr] - although this is not necessary.
+For the following examples we will use an adapted version of the Flying Etiquette by five-thirty-eight dataset [@flying] that is included in the `dropout` package. In these workflow examples, I will be using dplyr verbs [@dplyr] — although this is not necessary.
 
 As illustrated with the `flying` dataset example, even though all columns are arranged in the correct order of survey items, the last column survey_type does not correspond to a survey item. In such scenarios, the dropout package intuitively addresses this issue by disregarding the non-survey column and automatically setting the last_col argument to `location_census_region`. This adjustment is accompanied by a warning to inform the user. However, in more complex situations, it's advisable to either create a subset of your data or manually set the last_col argument to the actual last survey item. We will demonstrate this approach in the following examples.
 
