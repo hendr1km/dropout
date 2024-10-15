@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">dropout</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,13 @@
 </div>
 <!-- badges: start -->
 
-<p>The <code>dropout</code> package offers robust tools for dropout analysis in survey data. It helps you identify and handle incomplete responses effectively to ensure the quality of your research findings.</p>
+<p>The <code>dropout</code> package offers tools for dropout analysis in survey data. It helps you identify and handle incomplete responses.</p>
+<div class="section level2">
+<h2 id="dropout-v220">dropout v2.2.0<a class="anchor" aria-label="anchor" href="#dropout-v220"></a>
+</h2>
+<p>The latest version of the dropout package introduces significant updates to the codebase, aimed at reducing unexpected behavior and minimizing dependencies by directly utilizing R’s built-in C API.</p>
+<p>If you need to access the previous version of the package, you can download it through <a href="https://figshare.com/articles/software/dropout/25355746/1?file=44902738" class="external-link">Figshare</a>.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -99,34 +105,7 @@
 <li><p><strong>drop_detect</strong>: Detects participants who drop out of the survey by recognizing NA sequences up to the last question of the survey. Additionally, the function provides the column name and index where the dropout occurs.</p></li>
 <li><p><strong>dropout_summary</strong>: Offers a high-level summary of dropout occurrences, providing key statistics to understand the patterns of participant dropouts across different survey questions.</p></li>
 </ul>
-<div class="section level3">
-<h3 id="using-drop_detect">Using <code>drop_detect</code>
-<a class="anchor" aria-label="anchor" href="#using-drop_detect"></a>
-</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hendr1km/dropout" class="external-link">dropout</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># not necessary, but recommended</span></span>
-<span></span>
-<span><span class="co"># Detect dropouts in the 'flying' dataset up to the column "location_census_region"</span></span>
-<span><span class="fu"><a href="reference/drop_detect.html">drop_detect</a></span><span class="op">(</span><span class="va">flying</span>, <span class="st">"location_census_region"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">flying</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dropout</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">|</span> <span class="va">dropout_index</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="using-dropout_summary">Using <code>dropout_summary</code>
-<a class="anchor" aria-label="anchor" href="#using-dropout_summary"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hendr1km/dropout" class="external-link">dropout</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Summarizing dropouts in the 'flying' dataset up to the column "location_census_region"</span></span>
-<span><span class="fu">dropout_summary</span><span class="op">(</span><span class="va">flying</span>, <span class="st">"location_census_region"</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="further-reading">Further Reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
-</h2>
-<p>For more details, practical examples, and tips on interpreting summary statistics, please refer to the package <a href="https://hendr1km.github.io/dropout/articles/intro_to_dropout.html">vignette</a>.</p>
+<p>For practical examples please refer to the package <a href="https://hendr1km.github.io/dropout/articles/intro_to_dropout.html">vignette</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

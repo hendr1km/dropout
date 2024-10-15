@@ -25,6 +25,12 @@
     <loc>https://hendr1km.github.io/dropout/news/index.html</loc>
   </url>
   <url>
+    <loc>https://hendr1km.github.io/dropout/reference/c_prepare.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/check_input.html</loc>
+  </url>
+  <url>
     <loc>https://hendr1km.github.io/dropout/reference/drop_detect.html</loc>
   </url>
   <url>
@@ -34,9 +40,45 @@
     <loc>https://hendr1km.github.io/dropout/reference/drop_summary.html</loc>
   </url>
   <url>
+    <loc>https://hendr1km.github.io/dropout/reference/dropout-package.html</loc>
+  </url>
+  <url>
     <loc>https://hendr1km.github.io/dropout/reference/flying.html</loc>
   </url>
   <url>
     <loc>https://hendr1km.github.io/dropout/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_column.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_complete.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_drop.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_drop_id.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_drop_index.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_na.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_sec_length.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_sec_na.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metric_single_na.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metrics_detect.html</loc>
+  </url>
+  <url>
+    <loc>https://hendr1km.github.io/dropout/reference/metrics_summary.html</loc>
   </url>
 </urlset>
