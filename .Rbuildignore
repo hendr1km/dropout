@@ -8,3 +8,5 @@
 ^\.github$
 ^CRAN-SUBMISSION$
 ^articles$
+^doc$
+^Meta$
