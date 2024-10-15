@@ -7,7 +7,7 @@
 
 The `dropout` package offers tools for dropout analysis in survey data. It helps you identify and handle incomplete responses.
 
-## dropout v2.2.0
+## dropout v2.2.1
 The latest version of the dropout package introduces significant updates to the codebase, aimed at reducing unexpected behavior and minimizing dependencies by directly utilizing R's built-in C API.
 
 If you need to access the previous version of the package, you can download it through [Figshare](https://figshare.com/articles/software/dropout/25355746/1?file=44902738).

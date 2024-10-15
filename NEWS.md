@@ -10,7 +10,7 @@
 
 - Issues related to the functions have been resolved, appearing when working with different data types in surveys
 
-# dropout 2.2 (Release date: 2024-10-15)
+# dropout 2.2.1 (Release date: 2024-10-15)
 
 - No More Dependency Enforcements:
 The package now leverages calls to the native C API, eliminating the need to enforce dependencies. This change ensures improved performance and long-term sustainability of the package.
